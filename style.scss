@@ -1,0 +1,758 @@
+// ROOT
+:root {
+    --gray-600: #5E5E5E;
+    --gray-900: #1A1A1A;
+    --blue-100: #f8faff;
+    --blue-200: #e6eeff;
+    --blue-300: #BED1FF;
+    --blue-400: #388cff;
+    --blue-500: #006cff;
+    --blue-600: #0056cc;
+    --blue-700: #002b66;
+    --blue-800: #001633;
+    --blue-900: #1c2029;
+}
+
+*, body {
+    font-family: 'Red Hat Display', sans-serif;
+}
+
+// VARIABLES
+$prefix: bs- !default;
+$enable-important-utilities:  true !default;
+
+// SPACERS
+$spacers: (
+  0: 0px, // 0
+  1: 0.5rem, // 8
+  2: 0.75rem, // 12
+  3: 0.875rem, // 14
+  4: 1rem, // 16
+  5: 1.5rem, // 24
+  6: 1.75rem, // 28
+  7: 2rem, // 32
+  8: 3rem, // 48
+  9: 3.75rem, // 60
+  10: 5rem, // 80
+);
+
+// BREAKPOINTS
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;
+
+// COLORS
+$colors: (
+    "gray-600": #5E5E5E,
+    "gray-900": #1A1A1A,
+    "blue-100": #F8FAFF,
+    "blue-200": #E6EEFF,
+    "blue-300": #BED1FF,
+    "blue-400": #388CFF,
+    "blue-500": #006CFF,
+    "blue-600": #0056CC,
+    "blue-700": #002B66,
+    "blue-800": #001633,
+    "blue-900": #1C2029
+);
+
+// FONT-SIZES
+$font-sizes: (
+  3xs: 0.5rem, // 8
+  2xs: 0.625rem, // 10
+  xs: 0.75rem, // 12
+  sm: 0.875rem, // 14
+  md: 1rem, // 16
+  lg: 1.125rem, // 18
+  xl: 1.25rem, // 20
+  xxl: 1.25rem, // 24
+  3xl: 1.625rem, // 26
+  4xl: 1.75rem, // 28
+  5xl: 2rem, // 32
+  6xl: 2.25rem, // 36
+  7xl: 3.5rem, // 56
+);
+
+// FONT-WEIGHTS
+$font-weights: (
+  400: 400,
+  500: 500,
+  600: 600,
+  700: 700,
+);
+
+// Utility generator
+// Used to generate utilities & print utilities
+@mixin generate-utility($utility, $infix, $is-rfs-media-query: false) {
+  $values: map-get($utility, values);
+
+  // If the values are a list or string, convert it into a map
+  @if type-of($values) == "string" or type-of(nth($values, 1)) != "list" {
+    $values: zip($values, $values);
+  }
+
+  @each $key, $value in $values {
+    $properties: map-get($utility, property);
+
+    // Multiple properties are possible, for example with vertical or horizontal margins or paddings
+    @if type-of($properties) == "string" {
+      $properties: append((), $properties);
+    }
+
+    // Use custom class if present
+    $property-class: if(map-has-key($utility, class), map-get($utility, class), nth($properties, 1));
+    $property-class: if($property-class == null, "", $property-class);
+
+    // Use custom CSS variable name if present, otherwise default to `class`
+    $css-variable-name: if(map-has-key($utility, css-variable-name), map-get($utility, css-variable-name), map-get($utility, class));
+
+    // State params to generate pseudo-classes
+    $state: if(map-has-key($utility, state), map-get($utility, state), ());
+
+    $infix: if($property-class == "" and str-slice($infix, 1, 1) == "-", str-slice($infix, 2), $infix);
+
+    // Don't prefix if value key is null (eg. with shadow class)
+    $property-class-modifier: if($key, if($property-class == "" and $infix == "", "", "-") + $key, "");
+
+    @if map-get($utility, rfs) {
+      // Inside the media query
+      @if $is-rfs-media-query {
+        $val: rfs-value($value);
+
+        // Do not render anything if fluid and non fluid values are the same
+        $value: if($val == rfs-fluid-value($value), null, $val);
+      }
+      @else {
+        $value: rfs-fluid-value($value);
+      }
+    }
+
+    $is-css-var: map-get($utility, css-var);
+    $is-local-vars: map-get($utility, local-vars);
+    $is-rtl: map-get($utility, rtl);
+
+    @if $value != null {
+      @if $is-rtl == false {
+        /* rtl:begin:remove */
+      }
+
+      @if $is-css-var {
+        .#{$property-class + $infix + $property-class-modifier} {
+          --#{$prefix}#{$css-variable-name}: #{$value};
+        }
+
+        @each $pseudo in $state {
+          .#{$property-class + $infix + $property-class-modifier}-#{$pseudo}:#{$pseudo} {
+            --#{$prefix}#{$css-variable-name}: #{$value};
+          }
+        }
+      } @else {
+        .#{$property-class + $infix + $property-class-modifier} {
+          @each $property in $properties {
+            @if $is-local-vars {
+              @each $local-var, $variable in $is-local-vars {
+                --#{$prefix}#{$local-var}: #{$variable};
+              }
+            }
+            #{$property}: $value if($enable-important-utilities, !important, null);
+          }
+        }
+
+        @each $pseudo in $state {
+          .#{$property-class + $infix + $property-class-modifier}-#{$pseudo}:#{$pseudo} {
+            @each $property in $properties {
+              @if $is-local-vars {
+                @each $local-var, $variable in $is-local-vars {
+                  --#{$prefix}#{$local-var}: #{$variable};
+                }
+              }
+              #{$property}: $value if($enable-important-utilities, !important, null);
+            }
+          }
+        }
+      }
+
+      @if $is-rtl == false {
+        /* rtl:end:remove */
+      }
+    }
+  }
+}
+
+$utilities: () !default;
+$utilities: map-merge(
+    (
+        "width": (
+          property: width,
+          class: w,
+          values: (
+            25: 25%,
+            50: 50%,
+            75: 75%,
+            100: 100%,
+            auto: auto
+          )
+        ),
+        "overflow": (
+          property: overflow,
+          values: auto hidden visible scroll,
+        ),
+        "color": (
+          property: color,
+          class: "color-",
+          values: map-merge(
+            (),
+            $colors
+          )
+        ),
+        "background-color": (
+          property: background-color,
+          class: "bg-",
+          local-vars: (
+            "bg-opacity": 1
+          ),
+          values: map-merge(
+            $colors,
+            (
+              "transparent": transparent
+            )
+          )
+        ),
+        "font-size": (
+          property: font-size,
+          class: "fs-",
+          values: $font-sizes
+        ),
+        "font-weights": (
+          property: font-weight,
+          class: "fw-",
+          values: $font-weights
+        ),
+        "margin": (
+          responsive: true,
+          property: margin,
+          class: "m-",
+          values: map-merge($spacers, (auto: auto))
+        ),
+        "margin-x": (
+          responsive: true,
+          property: margin-right margin-left,
+          class: "mx-",
+          values: map-merge($spacers, (auto: auto))
+        ),
+        "margin-y": (
+          responsive: true,
+          property: margin-top margin-bottom,
+          class: "my-",
+          values: map-merge($spacers, (auto: auto))
+        ),
+        "margin-top": (
+          responsive: true,
+          property: margin-top,
+          class: "mt-",
+          values: map-merge($spacers, (auto: auto))
+        ),
+        "margin-end": (
+          responsive: true,
+          property: margin-right,
+          class: "me-",
+          values: map-merge($spacers, (auto: auto))
+        ),
+        "margin-bottom": (
+          responsive: true,
+          property: margin-bottom,
+          class: "mb-",
+          values: map-merge($spacers, (auto: auto))
+        ),
+        "margin-start": (
+          responsive: true,
+          property: margin-left,
+          class: "ms-",
+          values: map-merge($spacers, (auto: auto))
+        ),
+        "padding": (
+          responsive: true,
+          property: padding,
+          class: "p-",
+          values: $spacers
+        ),
+        "padding-x": (
+          responsive: true,
+          property: padding-right padding-left,
+          class: "px-",
+          values: $spacers
+        ),
+        "padding-y": (
+          responsive: true,
+          property: padding-top padding-bottom,
+          class: "py-",
+          values: $spacers
+        ),
+        "padding-top": (
+          responsive: true,
+          property: padding-top,
+          class: "pt-",
+          values: $spacers
+        ),
+        "padding-end": (
+          responsive: true,
+          property: padding-right,
+          class: "pe-",
+          values: $spacers
+        ),
+        "padding-bottom": (
+          responsive: true,
+          property: padding-bottom,
+          class: "pb-",
+          values: $spacers
+        ),
+        "padding-start": (
+          responsive: true,
+          property: padding-left,
+          class: "ps-",
+          values: $spacers
+        ),
+    )
+, $utilities);
+
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+  @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}");
+}
+
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// Loop over each breakpoint
+@each $breakpoint in map-keys($grid-breakpoints) {
+
+  // Generate media query if needed
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    // Loop over each utility property
+    @each $key, $utility in $utilities {
+      // The utility can be disabled with `false`, thus check if the utility is a map first
+      // Only proceed if responsive media queries are enabled or if it's the base media query
+      @if type-of($utility) == "map" and (map-get($utility, responsive) or $infix == "") {
+        @include generate-utility($utility, $infix);
+      }
+    }
+  }
+}
+
+@-webkit-keyframes hoverDown {
+    0% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes hoverDown {
+    0% { transform: translateY(-10px); }
+    100% { transform: translateY(0px);}
+}
+
+@-webkit-keyframes hoverUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+@keyframes hoverUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px);}
+}
+
+@-webkit-keyframes moveUpDown {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+@keyframes moveUpDown {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px);}
+}
+
+.hover-up {
+    cursor: pointer;
+    &:not(:hover) {
+        transform: translateY(0px);
+        animation: hoverDown 1s ease-in-out forwards;
+    }
+    &:hover {
+        -webkit-animation: hoverUp 1s ease forwards;
+        animation: hoverUp 1s ease forwards;
+    }
+}
+
+.move-up-down {
+    -webkit-animation: moveUpDown 1s ease infinite alternate;
+    animation: moveUpDown 1s ease infinite alternate;
+}
+
+.mw-none {
+    max-width: none !important;
+}
+
+// H TAGS
+h1 {
+    font-size: 3.5rem; // 56px
+}
+
+h2 {
+    font-size: 3rem; // 48px
+}
+
+h3 {
+    font-size: 2.5rem; // 40px
+}
+
+h4 {
+    font-size: 2rem; // 32px
+}
+
+h5 {
+    font-size: 1.5rem; // 24px
+}
+
+h6 {
+    font-size: 1.25rem; // 20px
+}
+
+.separator {
+    &-solid {
+        &--light {
+            border-top: 1px solid rgba(199, 223, 255, .2);
+        }
+    }
+    &-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 100%;
+        &--light {
+            background-color: #687CA3;
+        }
+    }
+}
+
+// FORM-CONTROL
+.form-control {
+    &:focus {
+        box-shadow: none;
+    }
+    &--dark {
+        background-color: #242B3A;
+        color: #A2BDFF;
+        border: none;
+        &:focus {
+            background-color: #242B3A;
+            color: #A2BDFF;
+            box-shadow: none;
+        }
+    }
+}
+
+// BUTTONS
+.btn {
+    font-size: 1rem;
+    &-primary {
+        color: #fff;
+        background-color: var(--blue-400) !important;
+        border-color: var(--blue-400) !important;
+    }
+    &-primary {
+        background-color: var(--blue-400) !important;
+        &:hover {
+            background-color: var(--blue-500) !important;
+        }
+        &:active {
+            background-color: var(--blue-600) !important;
+        }
+        &:disabled, &.disabled {
+            background-color: var(--blue-200) !important;
+        }
+    }
+}
+
+.footer-social-icon {
+    &.facebook {
+        background-image: url(media/icon/icon-facebook.svg);
+    }
+    &.twitter {
+        background-image: url(media/icon/icon-twitter.svg);
+    }
+    &.instagram {
+        background-image: url(media/icon/icon-instagram.svg);
+    }
+    &.youtube {
+        background-image: url(media/icon/icon-youtube.svg);
+    }
+    &.telegram {
+        background-image: url(media/icon/icon-telegram.svg);
+    }
+    &.medium {
+        background-image: url(media/icon/icon-medium.svg);
+    }
+    &.linkedin {
+        background-image: url(media/icon/icon-linkedin.svg);
+    }
+}
+
+.footer-social-list-item {
+    padding: 1px 5px;
+    & a {
+        background-color: rgba(42, 53, 83, 1);
+    }
+    & a:hover {
+        background-color: rgba(42, 53, 83, 0.7);
+    }
+}
+
+.coin-logos {
+    &--top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      & > img {
+          &:nth-child(2), &:nth-child(4) {
+              padding-top: 55px;
+          }
+          &:nth-child(3) {
+              padding-top: 55px;
+          }
+      }
+    }
+    &--bottom {
+      & > img {
+          position: absolute;
+          &:nth-child(1){
+              top: -40px;
+              left: 10%;
+          }
+          &:nth-child(2) {
+              bottom: 101px;
+              left: 20%;
+          }
+          &:nth-child(3) {
+              top: -40px;
+              right: 15%;
+          }
+          &:nth-child(4) {
+              bottom: 90px;
+              right: 15%;
+          }
+          &:nth-child(5) {
+              top: 110px;
+              right: 0px;
+          }
+      }
+    }
+}
+
+// NAVBAR
+
+.navbar-light {
+    .navbar-nav {
+        .nav-link {
+            font-size: 16px;
+            color: var(--gray-900);
+            font-weight: 500;
+        }
+        .active>.nav-link, .nav-link.active, .nav-link.show, .show>.nav-link {
+            color: var(--blue-500);
+        }
+    }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 1' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    .navbar-toggler {
+        border: none;
+    }
+}
+
+.border {
+    &-primary-light {
+        border-color: #C7DFFF;
+    }
+}
+
+.symbol-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    &--primary {
+      background-color: #006cff;
+      color: white;
+      &-light {
+          background-color: #66A7FF;
+      }
+    }
+    &--dark {
+      background-color: #001633;
+    }
+    &--xs {
+      width: 50px;
+      height: 50px;
+    }
+    &--sm {
+      width: 150px;
+      height: 150px;
+    }
+    &--md {
+      width: 200px;
+      height: 200px;
+    }
+    &--lg {
+      width: 400px;
+      height: 400px;
+    }
+}
+
+.bubble-layer {
+    position: relative;
+    height: 572px;
+    & > div:nth-child(1) {
+      position: absolute;
+      left: 10px;
+      top: 36px;
+    }
+    & > div:nth-child(2) {
+      position: absolute;
+      left: 207px;
+      top: 357px;
+    }
+    & > div:nth-child(3) {
+      position: absolute;
+      left: 339px;
+      top: 77px;
+    }
+    & > div:nth-child(4) {
+      position: absolute;
+      left: 399px;
+      top: 61px;
+    }
+    & > div:nth-child(5) {
+      position: absolute;
+      left: 838px;
+      top: 56px;
+    }
+}
+
+@media (min-width: 1600px) {
+  .bubble-layer {
+    transform: scale(1);
+  }
+}
+
+@media (min-width: 991.98px) and (max-width: 1600px) {
+  .bubble-layer {
+    margin-top: -100px;
+    margin-left: -100px;
+    transform: scale(0.6);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .bubble-layer {
+    margin-top: -150px;
+    height: 616px;
+    transform: scale(0.5);
+    & > div:nth-child(1) {
+        position: absolute;
+        left: 18px;
+        top: 18px;
+    }
+    & > div:nth-child(2) {
+        position: absolute;
+        left: 407px;
+        top: 784px;
+    }
+    &  > div:nth-child(3) {
+        position: absolute;
+        left: 42px;
+        top: 450px;
+        transform: scale(1.5);
+    }
+    & > div:nth-child(4) {
+        position: absolute;
+        left: 176px;
+        top: 370px;
+    }
+    & > div:nth-child(5) {
+        position: absolute;
+        left: 441px;
+        top: 120px;
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    .bubble-layer {
+        margin-left: -100px;
+    }
+}
+
+
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-nav .nav-link {
+        padding: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+  .coin-logos--top {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 960px) {
+  .coin-logos {
+      &--bottom {
+          position: relative;
+          height: 141px;
+          & > img {
+              position: absolute;
+              &:nth-child(1){
+                  top: 8px;
+                  left: 0px;
+              }
+              &:nth-child(2) {
+                  bottom: 0px;
+                  left: 10%;
+              }
+              &:nth-child(3) {
+                  top: 8px;
+                  right: 0px;
+              }
+              &:nth-child(4) {
+                  bottom: 0px;
+                  right: 20%;
+              }
+              &:nth-child(5) {
+                  top: 0px;
+                  right: 40%;
+              }
+          }
+    }
+  }
+}

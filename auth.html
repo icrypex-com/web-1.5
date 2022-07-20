@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portföy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="fonts/icon-style.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"
+      rel="stylesheet"
+    />
+    <link href="plugins/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="plugins/vanillajs-datepicker/datepicker.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="plugins/vanillajs-datepicker/datepicker-bs5.min.css"
+      rel="stylesheet"
+    />
+    <link href="./styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <section class="py-11 mb-12">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mx-auto">
+            <div class="card-mw mx-auto">
+              <div class="card border border-gray-900">
+                <div class="card-body px-4 px-md-12 pt-9 text-center">
+                  <!-- -->
+                  <i class="icon-logo fs-7xl text-blue-400"></i>
+                  <ul class="nav nav-pills mt-8" id="auth-tab" role="tablist">
+                    <li class="nav-item flex-fill me-6" role="presentation">
+                      <button
+                        class="btn btn-outline-primary btn-lg w-100"
+                        id="pills-login-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#pills-login"
+                        type="button"
+                        role="tab"
+                        aria-controls="pills-login"
+                        aria-selected="true"
+                      >
+                        Giriş Yap
+                      </button>
+                    </li>
+                    <li class="nav-item flex-fill" role="presentation">
+                      <button
+                        class="btn btn-outline-primary btn-lg w-100 active"
+                        id="pills-register-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#pills-register"
+                        type="button"
+                        role="tab"
+                        aria-controls="pills-register"
+                        aria-selected="false"
+                      >
+                        Üye Ol
+                      </button>
+                    </li>
+                  </ul>
+                  <div class="tab-content">
+                    <div
+                      class="wizard-tab-pane tab-pane fade"
+                      id="pills-login"
+                      role="tabpanel"
+                      aria-labelledby="pills-login-tab"
+                      tabindex="0"
+                    >
+                      <ul
+                        class="nav nav-pills justify-content-center mt-8"
+                        id="login-tab"
+                        role="tablist"
+                      >
+                        <li
+                          class="nav-item me-0 mb-4 mb-lg-0 me-lg-12"
+                          role="presentation"
+                        >
+                          <button
+                            class="btn btn-link btn-lg w-100 pe-none py-0 active"
+                            id="pills-mem-info-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#pills-mem-info"
+                            type="button"
+                            role="tab"
+                            aria-controls="pills-mem-info"
+                            aria-selected="true"
+                          >
+                            <div class="wizard-tab-pane--step">1</div>
+                            <div class="text-blue-400">Üyelik Bilgileri</div>
+                          </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <button
+                            class="btn btn-link btn-lg w-100 pe-none py-0"
+                            id="pills-sms-verify-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#pills-sms-verify"
+                            type="button"
+                            role="tab"
+                            aria-controls="pills-sms-verify"
+                            aria-selected="false"
+                          >
+                            <div class="wizard-tab-pane--step">2</div>
+                            <div class="text-blue-400">SMS Doğrulama</div>
+                          </button>
+                        </li>
+                      </ul>
+                      <div class="tab-content">
+                        <div
+                          class="tab-pane fade show active"
+                          id="pills-mem-info"
+                          role="tabpanel"
+                          aria-labelledby="pills-mem-info-tab"
+                          tabindex="0"
+                        >
+                          <div class="pt-8">
+                            <div class="form-floating mb-6">
+                              <input
+                                type="email"
+                                class="form-control form-control-lg"
+                                id="form_login_email"
+                                placeholder="E-posta Adresi"
+                              />
+                              <label for="form_login_email"
+                                >E-posta Adresi</label
+                              >
+                            </div>
+                            <div class="form-floating d-flex flex-fill">
+                              <input
+                                type="password"
+                                class="form-control form-control-lg border-end-0 rounded-end-0"
+                                id="form_login_password"
+                                placeholder="Şifre"
+                              />
+                              <label for="form_login_password">Şifre</label>
+                              <a
+                                class="d-flex input-group-text bg-transparent border-start-0 rounded-start-0 rounded-3"
+                                data-toggle="show-password"
+                                href="#"
+                              >
+                                <i class="icon-eye fs-xxl text-gray-900"></i>
+                              </a>
+                            </div>
+                            <div class="d-grid mt-8">
+                              <button
+                                id="btn-mem-info"
+                                class="btn btn-primary btn-lg"
+                              >
+                                Devam
+                              </button>
+                            </div>
+                            <div class="mt-11">
+                              <a
+                                class="d-flex align-items-center justify-content-center text-gray-900"
+                                href="#"
+                              >
+                                <span class="fs-lg me-1">Şifremi Unuttum</span>
+                                <i class="icon-emoji-sad fs-xxl"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="tab-pane fade"
+                          id="pills-sms-verify"
+                          role="tabpanel"
+                          aria-labelledby="pills-sms-verify-tab"
+                          tabindex="0"
+                        >
+                          <div class="pt-8">
+                            <div class="mb-6">
+                              <input
+                                type="text"
+                                class="form-control form-control-lg text-center"
+                                id="form_login_code"
+                                placeholder="SMS Onay Kodu"
+                              />
+                              <div class="invalid-feedback">
+                                SMS Kodu Hatalı
+                              </div>
+                            </div>
+                            <div class="d-grid mt-8">
+                              <button
+                                id="btn-mem-info"
+                                class="btn btn-primary btn-lg"
+                              >
+                                Devam
+                              </button>
+                            </div>
+                            <div class="mt-11">
+                              <a
+                                class="d-flex align-items-center justify-content-center text-gray-900"
+                                href="#"
+                              >
+                                <span class="fs-lg me-1"
+                                  >SMS Tekrar Gönder</span
+                                >
+                                <i class="icon-message-text-again fs-xxl"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="tab-pane fade show active"
+                      id="pills-register"
+                      role="tabpanel"
+                      aria-labelledby="pills-register-tab"
+                      tabindex="0"
+                    >
+                      <!-- REGISTER -->
+                      <div
+                        class="wizard-tab-pane tab-pane fade show active"
+                        id="pills-sub-register"
+                        role="tabpanel"
+                        aria-labelledby="pills-sub-register-tab"
+                        tabindex="0"
+                      >
+                        <ul
+                          class="nav nav-pills justify-content-between flex-column flex-sm-row mt-8"
+                          id="register-tab"
+                          role="tablist"
+                        >
+                          <li class="nav-item mb-4 mb-sm-0" role="presentation">
+                            <button
+                              class="btn btn-link btn-lg w-100 pe-none py-0 active"
+                              id="pills-pre-subscription-tab"
+                              data-bs-toggle="pill"
+                              data-bs-target="#pills-pre-subscription"
+                              type="button"
+                              role="tab"
+                              aria-controls="pills-pre-subscription"
+                              aria-selected="true"
+                            >
+                              <div class="wizard-tab-pane--step">1</div>
+                              <div class="text-blue-400">Ön Üyelik</div>
+                            </button>
+                          </li>
+                          <li class="nav-item mb-4 mb-sm-0" role="presentation">
+                            <button
+                              class="btn btn-link btn-lg w-100 pe-none py-0"
+                              id="pills-per-info-tab"
+                              data-bs-toggle="pill"
+                              data-bs-target="#pills-per-info"
+                              type="button"
+                              role="tab"
+                              aria-controls="pills-per-info"
+                              aria-selected="false"
+                            >
+                              <div class="wizard-tab-pane--step">2</div>
+                              <div class="text-blue-400">Kişisel Bilgiler</div>
+                            </button>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <button
+                              class="btn btn-link btn-lg w-100 pe-none py-0"
+                              id="pills-sub-sms-verify-tab"
+                              data-bs-toggle="pill"
+                              data-bs-target="#pills-sub-sms-verify"
+                              type="button"
+                              role="tab"
+                              aria-controls="pills-sub-sms-verify"
+                              aria-selected="false"
+                            >
+                              <div class="wizard-tab-pane--step">3</div>
+                              <div class="text-blue-400">Sms Doğrulama</div>
+                            </button>
+                          </li>
+                        </ul>
+                        <div class="tab-content">
+                          <div
+                            class="tab-pane pb-11 fade show active"
+                            id="pills-pre-subscription"
+                            role="tabpanel"
+                            aria-labelledby="pills-pre-subscription-tab"
+                            tabindex="0"
+                          >
+                            <div class="pt-8">
+                              <div class="form-floating mb-6">
+                                <input
+                                  type="text"
+                                  class="form-control form-control-lg"
+                                  id="form_register_name"
+                                  placeholder="İsim"
+                                />
+                                <label for="form_register_name">İsim</label>
+                              </div>
+                              <div class="form-floating mb-6">
+                                <input
+                                  type="text"
+                                  class="form-control form-control-lg"
+                                  id="form_register_lastname"
+                                  placeholder="Soyisim"
+                                />
+                                <label for="form_register_lastname">
+                                  Soyisim
+                                </label>
+                              </div>
+                              <div class="form-floating mb-6">
+                                <input
+                                  type="email"
+                                  class="form-control form-control-lg"
+                                  id="form_register_email"
+                                  placeholder="E-posta Adresi"
+                                />
+                                <label for="form_register_email">
+                                  E-posta Adresi
+                                </label>
+                              </div>
+                              <div class="input-group flex-nowrap mb-4">
+                                <select
+                                  id="select2_country_code"
+                                  class="form-select form-select-lg flex-grow-0"
+                                  name="form_country_code"
+                                >
+                                  <option value="+54">Argentina</option>
+                                  <option value="+90">Turkey</option>
+                                </select>
+                                <div class="input-group-text d-none"></div>
+                                <input
+                                  type="text"
+                                  class="form-control form-control-lg ms-0"
+                                  id="form_phone_number"
+                                  placeholder="Telefon Numarası"
+                                />
+                              </div>
+                              <div class="d-grid mt-8">
+                                <button
+                                  id="btn-pre-subscription"
+                                  class="btn btn-primary btn-lg"
+                                >
+                                  Devam
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="tab-pane fade"
+                            id="pills-per-info"
+                            role="tabpanel"
+                            aria-labelledby="pills-per-info-tab"
+                            tabindex="0"
+                          >
+                            <div class="pt-8">
+                              <div class="form-floating mb-6">
+                                <select
+                                  class="form-select form-select-lg fs-lg"
+                                  id="form_register_nationality"
+                                  aria-label="Floating label select example"
+                                >
+                                  <option value="1">T.C. Vatandaşı</option>
+                                  <option value="2">Yabancı Uyruk</option>
+                                </select>
+                                <label for="form_register_nationality"
+                                  >Uyruk</label
+                                >
+                              </div>
+                              <div class="form-floating mb-6">
+                                <input
+                                  type="text"
+                                  class="form-control form-control-lg"
+                                  id="form_register_tckn"
+                                  placeholder="T.C. Kimlik No"
+                                />
+                                <label for="form_register_tckn">
+                                  T.C. Kimlik No
+                                </label>
+                              </div>
+                              <div class="form-floating mb-6">
+                                <select
+                                  id="select2_register_country"
+                                  class="form-select flex-grow-0"
+                                  name="form_register_country"
+                                >
+                                  <option value="de">
+                                    Germany (Deutschland)
+                                  </option>
+                                  <option value="tr">Türkiye (Türkiye)</option>
+                                </select>
+                              </div>
+                              <div class="form-floating mb-6 d-none">
+                                <input
+                                  type="text"
+                                  class="form-control form-control-lg"
+                                  id="form_register_ykn"
+                                  placeholder="YKN Numarası"
+                                />
+                                <label for="form_register_ykn">
+                                  YKN Numarası
+                                </label>
+                              </div>
+                              <div class="form-floating mb-6">
+                                <input
+                                  type="text"
+                                  class="form-control form-control-lg"
+                                  id="form_register_birth_date"
+                                  placeholder="Doğum Tarihi"
+                                />
+                                <label for="form_register_birth_date">
+                                  Doğum Tarihi
+                                </label>
+                              </div>
+                              <div class="form-floating d-flex flex-fill mb-6">
+                                <input
+                                  type="password"
+                                  class="form-control form-control-lg border-end-0 rounded-end-0"
+                                  id="form_register_password"
+                                  placeholder="Şifre"
+                                />
+                                <label for="form_register_password"
+                                  >Şifre</label
+                                >
+                                <a
+                                  class="d-flex input-group-text bg-transparent border-start-0 rounded-start-0 rounded-3"
+                                  data-toggle="show-password"
+                                  href="#"
+                                >
+                                  <i class="icon-eye fs-xxl text-gray-900"></i>
+                                </a>
+                              </div>
+                              <div class="form-floating d-flex flex-fill mb-6">
+                                <input
+                                  type="password"
+                                  class="form-control form-control-lg border-end-0 rounded-end-0"
+                                  id="form_register_password_verify"
+                                  placeholder="Şifre Tekar"
+                                />
+                                <label for="form_register_password_verify"
+                                  >Şifre Tekar</label
+                                >
+                                <a
+                                  class="d-flex input-group-text bg-transparent border-start-0 rounded-start-0 rounded-3"
+                                  data-toggle="show-password"
+                                  href="#"
+                                >
+                                  <i class="icon-eye fs-xxl text-gray-900"></i>
+                                </a>
+                              </div>
+
+                              <div>
+                                <div class="form-check mb-4">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+                                    id="form_regiter_term_agreement"
+                                  />
+                                  <label
+                                    class="form-check-label text-start fs-sm w-100"
+                                    for="form_regiter_term_agreement"
+                                  >
+                                    18 Yaşından büyük olduğumu beyan ederim,
+                                    <a class="fw-700" href="#"
+                                      >Ön Bilgilendirme Metni</a
+                                    >
+                                    ve
+                                    <a class="fw-700" href="#"
+                                      >Kullanım Sözleşmesini</a
+                                    >
+                                    okudum ve onaylıyorum.
+                                  </label>
+                                </div>
+                                <div class="form-check">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+                                    id="form_regiter_term_subscribe"
+                                  />
+                                  <label
+                                    class="form-check-label text-start fs-sm w-100"
+                                    for="form_regiter_term_subscribe"
+                                  >
+                                    Ticari reklam ve duyurulardan haber almak
+                                    istiyorum.
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div class="d-grid mt-8">
+                                <button
+                                  id="btn-register-per-info"
+                                  class="btn btn-primary btn-lg"
+                                >
+                                  Devam
+                                </button>
+                              </div>
+                              <div class="mt-11">
+                                <a
+                                  class="d-flex align-items-center justify-content-center text-gray-900"
+                                  href="#"
+                                >
+                                  <span class="fs-lg me-1">
+                                    SMS Tekrar Gönder
+                                  </span>
+                                  <i class="icon-message-text-again fs-xxl"></i>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="tab-pane fade"
+                            id="pills-sub-sms-verify"
+                            role="tabpanel"
+                            aria-labelledby="pills-sub-sms-verify-tab"
+                            tabindex="0"
+                          >
+                            <div class="pt-8">
+                              <div class="mb-8">
+                                <span class="text-blue-400">+90 555 55 55</span>
+                                numaralı telefona SMS Kodu gönderilmiştir.
+                                Tarafınıza gönderilen SMS kodununu giriniz.
+                              </div>
+                              <div class="mb-8">
+                                <input
+                                  type="text"
+                                  class="form-control form-control-lg text-center"
+                                  id="form_register_sms_verify_code"
+                                  placeholder="SMS Onay Kodu"
+                                />
+                                <div class="invalid-feedback">
+                                  SMS Kodu Hatalı
+                                </div>
+                              </div>
+                              <div class="d-grid mt-8">
+                                <button
+                                  id="btn-mem-info"
+                                  class="btn btn-primary btn-lg"
+                                >
+                                  Devam
+                                </button>
+                              </div>
+                              <div class="mt-11">
+                                <a
+                                  class="d-flex align-items-center justify-content-center text-gray-900"
+                                  href="#"
+                                >
+                                  <span class="fs-lg me-1"
+                                    >SMS Tekrar Gönder</span
+                                  >
+                                  <i class="icon-message-text-again fs-xxl"></i>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- REGISTER -->
+                    </div>
+                  </div>
+                  <!-- -->
+                </div>
+              </div>
+              <div class="mt-7 fs-sm text-blue-800 text-center mx-0 mx-lg-8">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                erat dui, molestie venenatis posuere a, tristique sed magna.
+                Pellentesque a nunc dui. Suspendisse mi turpis, tempor eu
+                iaculis tempus
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="plugins/jquery-3.6.0.min.js"></script>
+    <script src="plugins/select2/select2.min.js"></script>
+    <script src="plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="plugins/vanillajs-datepicker/datepicker.min.js"></script>
+    <script src="./auth.js"></script>
+  </body>
+</html>

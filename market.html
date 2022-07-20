@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portföy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="fonts/icon-style.css" rel="stylesheet" />
+    <link href="plugins/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="plugins/owl.carousel/owl.carousel.min.css" rel="stylesheet" />
+    <link
+      href="plugins/owl.carousel/owl.theme.default.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="plugins/datatable/dataTables.bootstrap5.min.css"
+      rel="stylesheet"
+    />
+    <link href="./styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- begin::COIN TABLE -->
+    <section class="py-12 mb-12">
+      <div class="container">
+        <div class="row g-6 mb-6">
+          <div class="col-lg-6 mb-0">
+            <div class="d-flex overflow-auto">
+              <input
+                type="radio"
+                class="btn-check"
+                name="options-outlined"
+                id="primary-outlined-all"
+                autocomplete="off"
+                checked
+              />
+              <label
+                class="btn btn-lg btn-outline-primary text-nowrap me-1"
+                for="primary-outlined-all"
+                >Hepsi</label
+              >
+              <input
+                type="radio"
+                class="btn-check"
+                name="options-outlined"
+                id="primary-outlined-favorite"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-lg btn-outline-primary text-nowrap me-1"
+                for="primary-outlined-favorite"
+                >Favoriler</label
+              >
+              <input
+                type="radio"
+                class="btn-check"
+                name="options-outlined"
+                id="primary-outlined-new-coin"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-lg btn-outline-primary text-nowrap me-1"
+                for="primary-outlined-new-coin"
+                >Yeni Coin</label
+              >
+              <input
+                type="radio"
+                class="btn-check"
+                name="options-outlined"
+                id="primary-outlined-defi"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-lg btn-outline-primary text-nowrap me-1"
+                for="primary-outlined-defi"
+                >DeFi</label
+              >
+              <input
+                type="radio"
+                class="btn-check"
+                name="options-outlined"
+                id="primary-outlined-metaverse"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-lg btn-outline-primary text-nowrap"
+                for="primary-outlined-metaverse"
+                >Metaverse</label
+              >
+            </div>
+          </div>
+          <div class="col-12 col-lg-auto ms-auto">
+            <div class="input-group mb-3" tabindex="0">
+              <span
+                class="input-group-text bg-transparent pe-0 rounded-3 rounded-end-0"
+              >
+                <i class="icon-search-normal fs-xxl text-gray-900"></i>
+              </span>
+              <input
+                id="datatable_search_input"
+                class="form-control form-control-lg fs-lg border-start-0"
+                type="text"
+                placeholder="Search"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="table-responsive">
+              <table
+                id="market_datatable"
+                class="table table-striped table-borderless"
+                style="width: 100%"
+              ></table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end::COIN TABLE -->
+
+    <!-- begin::VIDEO -->
+    <section class="mb-12">
+      <div class="container bg-gray-100 p-9 rounded-4">
+        <div class="row mb-8">
+          <div class="col-md-6 mx-auto text-center">
+            <h4 class="fw-700 text-blue-800 mb-1">
+              <img src="media/logo/icrypex-caligraphy-logo.svg" alt="" />
+              <span
+                >ile şimdi <br />
+                hızlıca işlem yap</span
+              >
+            </h4>
+            <p class="fs-lg">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+              tempus tortor sit amet orci condimentum dictum. Nulla et arcu ac
+              orci venenatis
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div id="video-carousel" class="owl-carousel owl-theme">
+              <div class="w-100 bg-gray-100 rounded-4 overflow-hidden">
+                <div class="item-img-wrapper position-relative">
+                  <img
+                    class="item-img"
+                    src="media/images/bitcoion-with-bg.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="fs-lg fw-700 p-6 text-center">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+              </div>
+              <div class="w-100 bg-gray-100 rounded-4 overflow-hidden">
+                <div class="item-img-wrapper position-relative">
+                  <img
+                    class="item-img"
+                    src="media/images/ethereum-with-bg.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="fs-lg fw-700 p-6 text-center">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+              </div>
+              <div class="w-100 bg-gray-100 rounded-4 overflow-hidden">
+                <div class="item-img-wrapper position-relative">
+                  <img
+                    class="item-img"
+                    src="media/images/ethereum-with-bg.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="fs-lg fw-700 p-6 text-center">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end::VIDEO -->
+
+    <!--begin::-->
+    <section class="mb-12">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+            <div class="collapse fade-collapse" id="collapseExample">
+              <div class="px-9 text-center fs-sm">
+                <p>
+                  Lorem Ipsum ist ein einfacher Demo-Text für die Print- und
+                  Schriftindustrie. Lorem Ipsum ist in der Industrie bereits der
+                  Standard Demo-Text seit 1500, als ein unbekannter
+                  Schriftsteller eine Hand voll Wörter nahm und diese
+                  durcheinander warf um ein Musterbuch zu erstellen. Es hat
+                  nicht nur 5 Jahrhunderte überlebt, sondern auch in Spruch in
+                  die elektronische Schriftbearbeitung geschafft (bemerke,
+                  nahezu unverändert). Bekannt wurde es 1960, mit dem erscheinen
+                  von "Letraset", welches Passagen von Lorem Ipsum enhielt, so
+                  wie Desktop Software wie "Aldus PageMaker" - ebenfalls mit
+                  Lorem Ipsum.Glauben oder nicht glauben, Lorem Ipsum ist nicht
+                  nur ein zufälliger Text. Er hat Wurzeln aus der Lateinischen
+                  Literatur von 45 v. Chr, was ihn über 2000 Jahre alt macht.
+                  Richar McClintock, ein Lateinprofessor des Hampden-Sydney
+                  College in Virgnia untersuche einige undeutliche Worte,
+                  "consectetur", einer Lorem Ipsum Passage und fand eine
+                  unwiederlegbare Quelle. Lorem Ipsum komm aus der Sektion
+                  1.10.32 und 1.10.33 des "de Finibus Bonorum et Malorum" (Die
+                  Extreme von Gut und Böse) von Cicero, geschrieben 45 v. Chr.
+                  Dieses Buch ist Abhandlung der Ethiktheorien, sehr bekannt
+                  wärend der Renaissance. Die erste Zeile des Lorem Ipsum,
+                  "Lorem ipsum dolor sit amet...", kommt aus einer Zeile der
+                  Sektion 1.10.32.
+                </p>
+                <p>
+                  Der Standardteil von Lorem Ipsum, genutzt seit 1500, ist
+                  reproduziert für die, die es interessiert. Sektion 1.10.32 und
+                  1.10.33 von "de Finibus Bonorum et Malroum" von Cicero sind
+                  auch reproduziert in ihrer Originalform, abgeleitet von der
+                  Englischen Version aus von 1914 (H. Rackham)Es gibt viele
+                  Variationen der Passages des Lorem Ipsum, aber der Hauptteil
+                  erlitt Änderungen in irgendeiner Form, durch Humor oder
+                  zufällige Wörter welche nicht einmal ansatzweise glaubwürdig
+                  aussehen. Wenn du eine Passage des Lorem Ipsum nutzt, solltest
+                  du aufpassen dass in der Mitte des Textes keine ungewollten
+                  Wörter stehen. Viele der Generatoren im Internet neigen dazu,
+                  vorgefertigte Stücke zu wiederholen - was es nötig machte
+                  einen richtigen Generator zu entwickeln. Wir nutzen ein
+                  Wörterbuch aus über 200 Lateinischen Wörter, kombiniert mit
+                  einer Handvoll Kunstsätzen, welche das Lorem Ipsum glaubwürdig
+                  macht. Das generierte Lorem Ipsum ist außerdem frei von
+                  Wiederholungen, Humor oder unqualitativen Wörter etc,
+                </p>
+              </div>
+            </div>
+            <a
+              href="#"
+              class="link-dark fs-lg fw-500"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseExample"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+            >
+              Daha Fazla
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--end::-->
+
+    <section class="bg-gray-100 py-11">
+      <div class="container">
+        <div class="row mb-12">
+          <div class="col-12 mx--auto text-center">
+            <h4 class="mb-6 fw-700">Sporu Seviyor ve Destekliyoruz</h4>
+            <p class="fs-lg text-black-600">
+              Başarılarına ortak olduğumuz Beşiktaş ICRYPEX Erkek Basketbol A
+              Takımı, 1907 Fenerbahçe Engelli Yıldızlar, Altay Spor Kulübü ve
+              Göztepe Spor Kulübü sponsorluklarımız ile Türk sporunu
+              desteklemekteyiz. Faydalı bir süreç izleyerek yeni
+              sponsorluklarımızla attığımız adımlar sayesinde Türk sporuna güç
+              katmaya devam edeceğiz.
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="overflow-hidden w-100">
+              <ul
+                class="list-unstyled d-flex align-items-center justify-content-between overflow-auto"
+              >
+                <li class="me-10">
+                  <a href="https://www.bjk.com.tr/tr" target="_blank">
+                    <img class="mw-none" src="media/logo/logo-bjk.svg" alt="" />
+                  </a>
+                </li>
+                <li class="me-10">
+                  <a href="https://www.altay.org.tr/" target="_blank">
+                    <img
+                      class="mw-none"
+                      src="media/logo/logo-altay.svg"
+                      alt=""
+                    />
+                  </a>
+                </li>
+                <li class="me-10">
+                  <a href="https://www.goztepe.org.tr/" target="_blank">
+                    <img
+                      class="mw-none"
+                      src="media/logo/logo-goztepe.svg"
+                      alt=""
+                    />
+                  </a>
+                </li>
+                <li class="me-10">
+                  <a href="https://www.1907.org/" target="_blank">
+                    <img
+                      class="mw-none"
+                      src="media/logo/logo-1907.svg"
+                      alt=""
+                    />
+                  </a>
+                </li>
+                <li class="me-10">
+                  <a href="https://www.erdeneruc.com/" target="_blank">
+                    <img
+                      class="mw-none"
+                      src="media/logo/logo-erden-eruc.svg"
+                      alt=""
+                    />
+                  </a>
+                </li>
+                <li>
+                  <a href="http://www.cembolukbasi.com/" target="_blank">
+                    <img
+                      class="mw-none"
+                      src="media/logo/logo-cembolukbasi.svg"
+                      alt=""
+                    />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="plugins/jquery-3.6.0.min.js"></script>
+    <script src="plugins/owl.carousel/owl.carousel.min.js"></script>
+    <script src="plugins/datatable/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatable/dataTables.bootstrap5.min.js"></script>
+    <script src="plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="./market.js"></script>
+  </body>
+</html>

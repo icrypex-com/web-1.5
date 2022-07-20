@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portföy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="fonts/icon-style.css" rel="stylesheet" />
+    <link href="plugins/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="./styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <section class="py-11 mb-12">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mx-auto">
+            <div class="card-mw mx-auto">
+              <div class="card border border-gray-900">
+                <div class="card-body px-4 px-md-12 pb-12 pt-9 text-center">
+                  <form class="needs-validation" novalidate>
+                    <div class="mb-8 text-center mt-8">
+                      <img
+                        class="mb-8"
+                        src="media/icon/password-check_bulk.svg"
+                        alt=""
+                      />
+                      <p class="fs-lg">ICRYPEX’e Tanımlı 2FA Kodunu Giriniz</p>
+                    </div>
+                    <div class="mb-8">
+                      <input
+                        type="text"
+                        class="form-control form-control-lg text-center"
+                        id="2fa--code"
+                        placeholder="2FA Kodu"
+                        required
+                      />
+                      <div class="invalid-feedback text-start">
+                        2FA Kodu Hatalı
+                      </div>
+                    </div>
+                    <div class="d-grid">
+                      <button type="submit" class="btn btn-lg btn-primary">
+                        Devam
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <p class="fs-sm text-center text-blue-800 mt-7">
+                Kişisel verileriniz, Aydınlatma Metni kapsamında işlenmektedir.
+                “Üye ol” veya “Sosyal Hesap” butonlarından birine basarak Üyelik
+                Sözleşmesi’ni, Rıza Metni’ni, Çerez Politikası’nı okuduğunuzu ve
+                kabul ettiğinizi onaylıyorsunuz.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="plugins/jquery-3.6.0.min.js"></script>
+    <script src="plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="./2fa.js"></script>
+  </body>
+</html>
